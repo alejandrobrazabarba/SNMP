@@ -66,7 +66,7 @@ m = M(ip, community="public", version=1)
 #print(getattr(m, "sysContact"))
 if (check):
 	checker(m)
-else
+else:
 	setter(m)
 	checker(m)
 
