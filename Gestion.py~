@@ -1,0 +1,6 @@
+from snimpy.manager import Manager as M
+from snimpy.manager import load
+
+load("IF-MIB")
+m = M("localhost")
+print(m.ifDescr[0])
