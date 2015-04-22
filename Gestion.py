@@ -2,6 +2,7 @@
 import sys
 from snimpy.manager import Manager as M
 from snimpy.manager import load
+import argparse #Para la gestion de los argumentos de entrada
 
 def setter(m):
 	f = open(archivo, 'r')
@@ -25,20 +26,29 @@ ip="10.10.10.2"
 archivo='configuracion.ini'
 check=False
 
-if (len(sys.argv)>1):
-	for x in sys.argv:
-		if ("check" in x.islower()):
-		check=True
+#Anterior gestion de los argumentos de entrada
+# if (len(sys.argv)>1):
+# 	for x in sys.argv:
+# 		if ("check" in x.islower()):
+# 		check=True
 
-if (len(sys.argv)==2):
-	ip=sys.argv[1]
+# if (len(sys.argv)==2):
+# 	ip=sys.argv[1]
 
-if (len(sys.argv)>3):
-	ip=sys.argv[1]
-	archivo=sys.argv[2]
+# if (len(sys.argv)>3):
+# 	ip=sys.argv[1]
+# 	archivo=sys.argv[2]
 
-#load("SNMPv2-SMI.my")
-#load(" SNMPv2-TC.my")
+#Nueva gestion de los argumentos de entrada
+parser = argparse.ArgumentParser(description='Realiza gets y sets SNMP leyendo un archivo en el que se le indican pares de OIDs y valores')
+parser.add_argument('ip', metavar='IP', type=string, nargs=1,default="10.10.10.2",
+					help='Direccion IP del agente SNMP')
+parser.add_argument('configfile',default='configuracion.ini',help='archivo de configuracion')
+parser.add_argument('--check')
+
+if (args.check):
+	print("only checking, not setting")
+
 load("mibs/RFC1155-SMI.mib")
 load("mibs/RFC-1212.mib")
 load("mibs/rfc1213.mib")
@@ -46,7 +56,7 @@ load("./SNMPv2-SMI.my")
 load("./SNMPv2-TC.my")
 load("./SNMPv2-CONF.my")
 load("mibs/rfc2819.mib")
-#load("ejemplo.mib")
+
 m = M(ip, community="public", version=1)
 #print(m.sysUpTime)
 #print(m.sysContact)
