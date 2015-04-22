@@ -41,7 +41,7 @@ check=False
 
 #Nueva gestion de los argumentos de entrada
 parser = argparse.ArgumentParser(description='Realiza gets y sets SNMP leyendo un archivo en el que se le indican pares de OIDs y valores')
-parser.add_argument('ip', metavar='IP' nargs=1,default="10.10.10.2",
+parser.add_argument('ip', metavar='IP' ,nargs=1,default="10.10.10.2",
 					help='Direccion IP del agente SNMP')
 parser.add_argument('configfile',default='configuracion.ini',help='archivo de configuracion')
 parser.add_argument('--check')
